@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE language SYSTEM "language.dtd">
+<language name="OOC" section="Sources" 
+  version="1.43"  kateversion="2.4" indenter="cstyle" extensions="*.ooc;*.use"
+  mimetype="text/x-ooc"
+  version="0.1" 
+  kateversion="2.4"
+  author="beoran@sourceforge.org" 
+  license="ZLIB"
+>
+<!--
+#
+# Syntax highlighting for KATE, for the OOC programming language. 
+#
+-->
+  <highlighting>
+    <list name="keywords">
+      <item> as </item>
+      <item> break </item>
+      <item> case </item>
+      <item> class </item>
+      <item> continue </item>
+      <item> cover </item>
+      <item> default </item>
+      <item> do </item>
+      <item> else </item>
+      <item> extends </item>
+      <item> fallthrough </item>
+      <item> false </item>
+      <item> for </item>
+      <item> from </item>
+      <item> func </item>
+      <item> if </item>
+      <item> in </item>
+      <item> include </item>
+      <item> interface </item>
+      <item> implement </item>
+      <item> import </item>
+      <item> new </item>
+      <item> null </item>
+      <item> operator </item>
+      <item> proto </item>
+      <item> return </item>
+      <item> super </item>
+      <item> switch </item>
+      <item> this </item>
+      <item> true </item>
+      <item> use </item>
+      <item> version </item>
+      <item> while </item>
+    </list>
+    
+    <list name="access-control">
+      <item> abstract </item>
+      <item> const </item>
+      <item> extern </item>
+      <item> final </item>
+      <item> inline </item>
+      <item> static </item>
+    </list>
+
+    <list name="functions">
+      <item> printf </item>
+      <item> println </item>
+    </list>
+
+    <list name="types">
+      <item> Bool </item>
+      <item> Char </item>
+      <item> Double </item>
+      <item> Float </item>
+      <item> Float32 </item>
+      <item> Float64 </item>
+      <item> Float128 </item>
+      <item> Func </item>
+      <item> Int </item>
+      <item> Int8 </item>
+      <item> Int16 </item>
+      <item> Int32 </item>
+      <item> Int64 </item>
+      <item> Int80 </item>
+      <item> Int128 </item>
+      <item> LDouble </item>
+      <item> LLong </item>
+      <item> Long </item>
+      <item> Octet </item>
+      <item> Pointer </item>
+      <item> Short </item>
+      <item> SizeT </item>
+      <item> String </item>
+      <item> This </item>
+      <item> UChar </item>
+      <item> UInt </item>
+      <item> UInt8 </item>
+      <item> UInt16 </item>
+      <item> UInt32 </item>
+      <item> UInt64 </item>
+      <item> UInt80 </item>
+      <item> UInt128 </item>
+      <item> ULLong </item>
+      <item> ULong </item>
+      <item> UShort </item>
+      <item> Void </item>
+      <item> WChar </item>
+    </list>
+    <contexts>
+      <!-- 
+           These are the operators: 
+           +, -, *, /, +=, -=,*=, /=, =, :=, ==, !=, !, %, ?, >, <, >=, <=, &&, ||, &, |, ^, ., ~, .., >>, <<, >>>, <<<, >>=, <<=, >>>=, <<<=
+      -->
+
+      <context attribute="Normal Text" lineEndContext="#stay" name="Normal">
+        <DetectSpaces />
+        <keyword attribute="Keyword" context="#stay" String="keywords"/>
+        <keyword attribute="Data Type" context="#stay" String="types"/>
+        <keyword attribute="Access Control" context="#stay" String="access-control"/>
+        <keyword attribute="Builtin Function" context="#stay" String="functions"/>
+        <DetectIdentifier />
+        <DetectChar attribute="Symbol" context="#stay" char="{" beginRegion="Brace1" />
+        <DetectChar attribute="Symbol" context="#stay" char="}" endRegion="Brace1" />
+        <HlCOct attribute="Octal" context="#stay"/>
+        <HlCHex attribute="Hex" context="#stay"/>
+        <HlCChar attribute="Char" context="#stay"/>
+        <DetectChar attribute="String" context="String" char="&quot;"/>
+        <DetectChar attribute="Multiline String" context="Multiline String" char="`"/>
+        <Detect2Chars attribute="Comment" context="Comment 1" char="/" char1="/"/>
+        <Detect2Chars attribute="Comment" context="Comment 2" char="/" char1="*" beginRegion="Comment"/>
+        <AnyChar attribute="Operator" context="#stay" String=":!%&amp;()+,-/.*&lt;=&gt;?[]|~^&#59;"/>
+      </context>
+      
+      <context attribute="String" lineEndContext="#pop" name="String">
+        <LineContinue attribute="String" context="#stay"/>
+        <HlCStringChar attribute="String Char" context="#stay"/>
+        <DetectChar attribute="String" context="#pop" char="&quot;"/>
+      </context>
+      
+      <context attribute="String" lineEndContext="#stay" name="Multiline String">
+        <LineContinue attribute="String" context="#stay"/>
+        <HlCStringChar attribute="String Char" context="#stay"/>
+        <DetectChar attribute="String" context="#pop" char="`"/>
+      </context>
+      
+      <context attribute="Comment" lineEndContext="#pop" name="Comment 1">
+        <LineContinue attribute="Comment" context="#stay"/>
+      </context>
+      
+      <context attribute="Comment" lineEndContext="#stay" name="Comment 2">
+        <Detect2Chars attribute="Comment" context="#pop" char="*" char1="/" endRegion="Comment"/>
+      </context>
+    </contexts>
+    <itemDatas>
+      <itemData name="Normal Text"  defStyleNum="dsNormal" spellChecking="false"/>
+      <itemData name="Keyword"      defStyleNum="dsKeyword" spellChecking="false"/>
+      <itemData name="Builtin Function" defStyleNum="dsDataType" spellChecking="false"/>
+      <itemData name="Access Control" defStyleNum="dsKeyword" spellChecking="false"/>
+      
+      <itemData name="Data Type"    defStyleNum="dsDataType" spellChecking="false"/>
+      <itemData name="Decimal"      defStyleNum="dsDecVal" spellChecking="false"/>
+      <itemData name="Octal"        defStyleNum="dsBaseN" spellChecking="false"/>
+      <itemData name="Hex"          defStyleNum="dsBaseN" spellChecking="false"/>
+      <itemData name="Float"        defStyleNum="dsFloat" spellChecking="false"/>
+      <itemData name="Char"         defStyleNum="dsChar" spellChecking="false"/>
+      <itemData name="String"       defStyleNum="dsString"/>
+      <itemData name="String Char"  defStyleNum="dsChar"/>
+      <itemData name="Comment"      defStyleNum="dsComment"/>
+      <itemData name="Symbol"       defStyleNum="dsNormal" spellChecking="false"/>
+      <itemData name="Operator"     defStyleNum="dsNormal" spellChecking="false"/>
+      <itemData name="Error"        defStyleNum="dsError" spellChecking="false"/>
+    </itemDatas>
+  </highlighting>
+  <general>
+    <comments>
+      <comment name="singleLine" start="//" />
+      <comment name="multiLine" start="/*" end="*/" />
+    </comments>
+    <keywords casesensitive="1" additionalDeliminator="'&quot;" />
+  </general>        
+</language>

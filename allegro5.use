@@ -1,0 +1,47 @@
+Name: Allegro5
+Description: OOC Bindings to the Allegro 5.1.x Library
+Includes: allegro5/allegro.h, allegro5/allegro_image.h
+
+# The version of the library
+Version: 5.1.5.1
+
+# This will be added to the list of folders the ooc compiler looks for .ooc files
+SourcePath: source
+
+# Modules that are automatically imported when 'use'-ing this library
+Imports: allegro5/Allegro
+
+# For programs, the main ooc file to compile when rock is called without arguments
+Main: samples/test_allegro.ooc
+
+# Dependencies - the 'use' of .use files
+# Requires: spit
+
+# gcc's -I
+# IncludePaths: /some/weird/place/include
+
+# will be included in all files using this .use file
+# Includes: someheader.h, someother.h
+
+# gcc's -L
+# LibPaths: /some/weird/place/include
+
+# will be linked with the final executable
+# Libs: -lsomething, -lotherthing
+
+# additional .c files to compile and link into the library/executable
+# Additionals: source/somefile.c
+
+Pkgs: allegro-5, allegro_image-5, allegro_acodec-5
+
+# CustomPkg: sdl2-config
+# CustomPkg: llvm-config, core executionengine jit, --cflags, --libs --ldflags
+# Linker: g++
+
+# OS X:
+# Frameworks: Carbon, OpenGL
+
+# Android-specific directives
+# AndroidLibs: SDL2
+# AndroidIncludes: ../SDL/
+

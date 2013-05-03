@@ -1,0 +1,29 @@
+ooc-allegro5
+============
+
+OOC Wrappers for Allegro 5.1.x.
+
+
+TODO
+===
+The following header files have not been wrapped at all, mostly because 
+of debatable usefulness in combination with OOC:
+
+fixed.h
+fmaths.h
+fshook.h
+
+Partially wrapped: 
+memory.h :  (only free and malloc, not the memory interface)
+
+
+
+
+
+
+
+
+
+
+
+
