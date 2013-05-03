@@ -25,6 +25,8 @@ end
 def split_params(params)
   params.split(',').map do |s|
     aid = s.strip.gsub(/\+/, ' ').gsub(/[ \t]*\*[ \t]*/, '*').gsub(/(\*+)/) {|m| m + ' '}
+    # get rid of pesky consts
+    aid = aid.gsub('const ', '').strip
     if aid == 'void'
       ['void', '']
     else
@@ -76,11 +78,37 @@ TYPEMAP = {
   "ALLEGRO_TIMER*"          => "Timer",
   "ALLEGRO_TRANSFORM *"     => "Transform",
   "ALLEGRO_TRANSFORM*"      => "Transform",
-  
+  "const ALLEGRO_USTR *"    => "UString",
+  "const ALLEGRO_USTR*"     => "UString", 
+  "const ALLEGRO_USTR_INFO *"    => "UStringInfo",
+  "const ALLEGRO_USTR_INFO*"     => "UStringInfo", 
+  "ALLEGRO_USTR *"    => "UString",
+  "ALLEGRO_USTR*"     => "UString", 
+  "ALLEGRO_USTR_INFO *"    => "UStringInfo",
+  "ALLEGRO_USTR_INFO*"     => "UStringInfo", 
+  "ALLEGRO_MIXER*"         => "Mixer",
+  "ALLEGRO_SAMPLE*"        => "Sample",
+  "ALLEGRO_SAMPLE_ID"      => "SampleId",
+  "ALLEGRO_SAMPLE_ID*"     => "SampleId*",
+  "ALLEGRO_SAMPLE_INSTANCE*" => "SampleInstance",
+  "ALLEGRO_AUDIO_STREAM*"    => "AudioStream",
+  "ALLEGRO_VOICE*"           => "Voice",
+  "ALLEGRO_AUDIO_RECORDER*"  => "AudioRecorder",
+  "ALLEGRO_AUDIO_DEPTH"      => "AudioDepth",
+  "ALLEGRO_CHANNEL_CONF"     => "ChannelConf",
+  "ALLEGRO_PLAYMODE"         => "PlayMode",
+  "ALLEGRO_EVENT*"           => "Event",
+  "ALLEGRO_EVENT_SOURCE*"    => "EventSource",
+  "ALLEGRO_AUDIO_EVENT*"     => "AudioEvent",
+  "unsignedint"              => "UInt"
+
+
 }
 
+
 def type_2_ooc(type) 
-  mapped = TYPEMAP[type] || type
+  aid    = type.gsub(' ', '')
+  mapped = TYPEMAP[aid] || type
   return mapped
 end
   
@@ -88,7 +116,24 @@ end
 input      = $stdin
 output     = $stdout
 
-cover_type = ARGV[0] || "ALLEGRO_BITMAP*"
+cover_types = [ "ALLEGRO_BITMAP*", "ALLEGRO_MIXER*", "ALLEGRO_COLOR", 
+                "ALLEGRO_SAMPLE*", "ALLEGRO_LOCKED_REGION *",
+                "ALLEGRO_FILE*"  , "ALLEGRO_FONT*",
+                "ALLEGRO_DISPLAY*", "ALLEGRO_DISPLAY_MODE*",
+                "ALLEGRO_JOYSTICK*",  "ALLEGRO_JOYSTICK_STATE",
+                "ALLEGRO_MOUSE_STATE", "ALLEGRO_MOUSE_STATE*",
+                "ALLEGRO_MOUSE_CURSOR*", "ALLEGRO_PATH*", "ALLEGRO_TIMER*", 
+                "ALLEGRO_TRANSFORM *", "ALLEGRO_TRANSFORM*",
+                "ALLEGRO_USTR*", "ALLEGRO_USTR_INFO*",
+  "ALLEGRO_MIXER*",
+  "ALLEGRO_SAMPLE*",
+  "ALLEGRO_SAMPLE_ID",
+  "ALLEGRO_SAMPLE_ID*",
+  "ALLEGRO_SAMPLE_INSTANCE*",
+  "ALLEGRO_AUDIO_STREAM*",
+  "ALLEGRO_VOICE*",
+  "ALLEGRO_AUDIO_RECORDER*"
+              ]
 
 input.each_line do  |line|
   aid = line.chomp.strip
@@ -101,8 +146,8 @@ input.each_line do  |line|
     params      = split_params(al_func[3])
     newparstr   = ''
     static     = true
-    if cover_type
-      if params.first[0] == cover_type
+    if cover_types
+      if cover_types.member?(params.first[0])
         static = false
         params.shift
       end

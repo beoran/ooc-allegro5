@@ -1,5 +1,7 @@
 use allegro5
 
+
+
 import allegro5/Allegro
 import allegro5/AllegroFile
 import allegro5/AllegroThread
@@ -13,6 +15,12 @@ import allegro5/Path
 import allegro5/Timer
 import allegro5/Touch
 import allegro5/Transform
+import allegro5/UString
+
+import allegro5/Acodec
+import allegro5/Audio
+
+
 import structs/ArrayList
 
 
@@ -67,6 +75,10 @@ TestSuite : class {
 
 main : func() -> Int {
   suite   := TestSuite new()
+  alok    := Al init()
+  suite test(alok, "Allegro not initialized");
+ 
+  us      := UString new("Hello")
   timeout : Timeout
   timeout init(2.0)
   ptr := Al malloc(123)
@@ -74,6 +86,7 @@ main : func() -> Int {
   Al free(ptr)
   suite test(Al getVersion() , ALLEGRO_VERSION_INT);
   suite report()
+  us free()
   "All done!" println()
   return 0
 }

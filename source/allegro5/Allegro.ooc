@@ -115,7 +115,9 @@ Al : cover {
   
   getErrno : extern(al_get_errno) static func (Void) -> Int
   setErrno : extern(al_set_errno) static func (errnum:Int) -> Void
+
   
+  installSystem   : extern(al_install_system) static func(version : Int, atexit : Pointer) -> Bool
   uninstallSystem : extern(al_uninstall_system) static func (Void) -> Void
   isSystemInstalled : extern(al_is_system_installed) static func (Void) -> Bool
   getSystemDriver : extern(al_get_system_driver) static func (Void) -> AllegroSystem
@@ -126,8 +128,12 @@ Al : cover {
   setAppName : extern(al_set_app_name) static func ( app_name:CString) -> Void
   getOrgName : extern(al_get_org_name) static func (Void) -> CString
   getAppName : extern(al_get_app_name) static func (Void) -> CString
-  inhibitScreensaver : extern(al_inhibit_screensaver) static func ( inhibit:Bool) -> Bool
-  
+  inhibitScreensaver : extern(al_inhibit_screensaver) static func (inhibit:Bool) -> Bool
+  atexit : extern(atexit) static func(fptr: Pointer) -> Int
+  init : static func() -> Bool {
+    installSystem(ALLEGRO_VERSION_INT, atexit)
+  }
+ 
 
 }
 

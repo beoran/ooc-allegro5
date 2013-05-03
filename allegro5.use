@@ -1,6 +1,6 @@
 Name: Allegro5
 Description: OOC Bindings to the Allegro 5.1.x Library
-Includes: allegro5/allegro.h, allegro5/allegro_image.h
+Includes: allegro5/allegro.h, allegro5/allegro_image.h, allegro5/allegro_acodec.h, allegro5/allegro_audio.h
 
 # The version of the library
 Version: 5.1.5.1
@@ -32,7 +32,7 @@ Main: samples/test_allegro.ooc
 # additional .c files to compile and link into the library/executable
 # Additionals: source/somefile.c
 
-Pkgs: allegro-5, allegro_image-5, allegro_acodec-5
+Pkgs: allegro-5, allegro_image-5, allegro_acodec-5, allegro_audio-5
 
 # CustomPkg: sdl2-config
 # CustomPkg: llvm-config, core executionengine jit, --cflags, --libs --ldflags

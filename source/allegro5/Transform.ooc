@@ -1,4 +1,6 @@
+use allegro5
 
+import allegro5/Allegro
 
 TransformStruct : cover from ALLEGRO_TRANSFORM {
   
