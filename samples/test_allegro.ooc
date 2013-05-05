@@ -1,4 +1,5 @@
 use allegro5
+// use allegro5_color
 
 
 
@@ -17,8 +18,10 @@ import allegro5/Touch
 import allegro5/Transform
 import allegro5/UString
 
-import allegro5/Acodec
-import allegro5/Audio
+
+import allegro5_color/Color
+import allegro5_acodec/Acodec
+import allegro5_audio/Audio
 
 
 import structs/ArrayList
@@ -76,15 +79,15 @@ TestSuite : class {
 main : func() -> Int {
   suite   := TestSuite new()
   alok    := Al init()
-  suite test(alok, "Allegro not initialized");
- 
+  suite test(alok, "Allegro not initialized")
+  col     := Color colorHtml("#ffaacc")
   us      := UString new("Hello")
-  timeout : Timeout
-  timeout init(2.0)
+//   timeout : Timeout
+//   timeout init(2.0)
   ptr := Al malloc(123)
   suite test~notnull(ptr)
   Al free(ptr)
-  suite test(Al getVersion() , ALLEGRO_VERSION_INT);
+  suite test(Al getVersion() , ALLEGRO_VERSION_INT)
   suite report()
   us free()
   "All done!" println()

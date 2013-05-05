@@ -3,6 +3,10 @@ ooc-allegro5
 
 OOC Wrappers for Allegro 5.1.x.
 
+REQUIREMENTS
+============
+
+You need Rock, and Allegro version 5.1.5 or later.
 
 TODO
 ===

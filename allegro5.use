@@ -1,4 +1,4 @@
-Name: Allegro5
+Name: Allegro5 5.1.5
 Description: OOC Bindings to the Allegro 5.1.x Library
 Includes: allegro5/allegro.h, allegro5/allegro_image.h, allegro5/allegro_acodec.h, allegro5/allegro_audio.h
 
@@ -31,6 +31,14 @@ Main: samples/test_allegro.ooc
 
 # additional .c files to compile and link into the library/executable
 # Additionals: source/somefile.c
+
+# /usr/local/lib/liballegro_acodec.so  /usr/local/lib/liballegro_memfile.so
+# /usr/local/lib/liballegro_audio.so   /usr/local/lib/liballegro_physfs.so
+# /usr/local/lib/liballegro_color.so   /usr/local/lib/liballegro_primitives.so
+# /usr/local/lib/liballegro_dialog.so  /usr/local/lib/liballegro_shader.so
+# /usr/local/lib/liballegro_font.so    /usr/local/lib/liballegro_ttf.so
+# /usr/local/lib/liballegro_image.so   /usr/local/lib/liballegro_video.so
+# /usr/local/lib/liballegro_main.so
 
 Pkgs: allegro-5, allegro_image-5, allegro_acodec-5, allegro_audio-5
 

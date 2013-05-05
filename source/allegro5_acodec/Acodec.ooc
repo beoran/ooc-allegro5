@@ -1,6 +1,6 @@
-
-/* Class: Acodec
- * Allegro codecs. 
+use allegro5, allegro5_acodec
+/* Cover: Acodec
+ * Cover for Allegro audio codecs addon.
  */
 Acodec : cover {
   
