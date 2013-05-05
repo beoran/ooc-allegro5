@@ -1,32 +1,63 @@
-use allegro5
+use allegro5, allegro5_audio
 
 import allegro5/Event
 
+
+ALLEGRO_EVENT_AUDIO_STREAM_FRAGMENT : extern const Int
+ALLEGRO_EVENT_AUDIO_STREAM_FINISHED : extern const Int
+ALLEGRO_EVENT_AUDIO_RECORDER_FRAGMENT : : extern const Int
+
+ALLEGRO_MAX_CHANNELS                    : extern const Int
+ALLEGRO_AUDIO_PAN_NONE                  : extern const Int
+ALLEGRO_EVENT_AUDIO_ROUTE_CHANGE        : extern const Int
+ALLEGRO_EVENT_AUDIO_INTERRUPTION        : extern const Int
+ALLEGRO_EVENT_AUDIO_END_INTERRUPTION    : extern const Int
+
+
 AudioDepth : enum {
-  
+   ALLEGRO_AUDIO_DEPTH_INT8     extern(ALLEGRO_AUDIO_DEPTH_INT8)
+   ALLEGRO_AUDIO_DEPTH_INT16    extern(ALLEGRO_AUDIO_DEPTH_INT16)
+   ALLEGRO_AUDIO_DEPTH_INT24    extern(ALLEGRO_AUDIO_DEPTH_INT24)
+   ALLEGRO_AUDIO_DEPTH_FLOAT32  extern(ALLEGRO_AUDIO_DEPTH_FLOAT32)
+   ALLEGRO_AUDIO_DEPTH_UNSIGNED extern(ALLEGRO_AUDIO_DEPTH_UNSIGNED)
+   ALLEGRO_AUDIO_DEPTH_UINT8    extern(ALLEGRO_AUDIO_DEPTH_UINT8) 
+   ALLEGRO_AUDIO_DEPTH_UINT16   extern(ALLEGRO_AUDIO_DEPTH_UINT16)
+   ALLEGRO_AUDIO_DEPTH_UINT24   extern(ALLEGRO_AUDIO_DEPTH_UINT24)
 }
+
 
 ChannelConf : cover from Int {
-  
+   ALLEGRO_CHANNEL_CONF_1   extern(ALLEGRO_CHANNEL_CONF_1)
+   ALLEGRO_CHANNEL_CONF_2   extern(ALLEGRO_CHANNEL_CONF_2)
+   ALLEGRO_CHANNEL_CONF_3   extern(ALLEGRO_CHANNEL_CONF_3)
+   ALLEGRO_CHANNEL_CONF_4   extern(ALLEGRO_CHANNEL_CONF_4)
+   ALLEGRO_CHANNEL_CONF_5_1 extern(ALLEGRO_CHANNEL_CONF_5_1)
+   ALLEGRO_CHANNEL_CONF_6_1 extern(ALLEGRO_CHANNEL_CONF_6_1)
+   ALLEGRO_CHANNEL_CONF_7_1 extern(ALLEGRO_CHANNEL_CONF_7_1)
 }
 
-PlayMode : cover from Int { 
-  
+PlayMode : cover from Int {
+  ALLEGRO_PLAYMODE_ONCE   extern(ALLEGRO_PLAYMODE_ONCE)
+  ALLEGRO_PLAYMODE_LOOP   extern(ALLEGRO_PLAYMODE_LOOP)
+  ALLEGRO_PLAYMODE_BIDIR  extern(ALLEGRO_PLAYMODE_BIDIR)
 }
 
-MixerQuality : cover from Int { 
-  
+
+MixerQuality : cover from Int {
+  ALLEGRO_MIXER_QUALITY_POINT   extern(ALLEGRO_MIXER_QUALITY_POINT)
+  ALLEGRO_MIXER_QUALITY_LINEAR  extern(ALLEGRO_MIXER_QUALITY_LINEAR)
+  ALLEGRO_MIXER_QUALITY_CUBIC   extern(ALLEGRO_MIXER_QUALITY_CUBIC)
 }
 
 
 
 Sample : cover from ALLEGRO_SAMPLE *  {
-destroySample : extern(al_destroy_sample) func () -> Void
-getSampleFrequency : extern(al_get_sample_frequency) func () -> UInt
-getSampleLengthg : extern(al_get_sample_length) func () -> UInt
-getSampleDepth : extern(al_get_sample_depth) func () -> AudioDepth
-getSampleChannels : extern(al_get_sample_channels) func () -> ChannelConf
-getSampleData : extern(al_get_sample_data) func () -> Pointer
+  destroy: extern(al_destroy_sample) func () -> Void
+  getFrequency : extern(al_get_sample_frequency) func () -> UInt
+  getLength: extern(al_get_sample_length) func () -> UInt
+  getDepth : extern(al_get_sample_depth) func () -> AudioDepth
+  getChannels : extern(al_get_sample_channels) func () -> ChannelConf
+  getData : extern(al_get_sample_data) func () -> Pointer
 }
 
 SampleInstance : cover from ALLEGRO_SAMPLE_INSTANCE * {
@@ -135,9 +166,15 @@ loadSampleF : extern(al_load_sample_f) func ( ident:CString) -> Sample
 getAudioEventSource : extern(al_get_audio_event_source) static func (Void) -> EventSource
 }
 
-AudioRecorderEvent : cover from ALLEGRO_AUDIO_RECORDER_EVENT * {
-  
-}
+
+AudioRecorderEvent : cover ALLEGRO_AUDIO_RECORDER_EVENT { 
+  type         : extern UInt
+  source       : extern Pointer
+  timestamp    : extern Double
+  buffer       : extern Pointer;
+  samples      : extern UInt;
+};
+
 
 AudioRecorder : cover from ALLEGRO_AUDIO_RECORDER * {
 startAudioRecorder : extern(al_start_audio_recorder) func () -> Bool
