@@ -1,9 +1,9 @@
-Name: Allegro5_color 5.1.5
-Description: OOC Bindings to the Allegro 5.1.x Library Color extensions
-Includes: allegro5/allegro.h, allegro5/allegro_color.h
+Name: Allegro5_primitives 5.1.5
+Description: OOC Bindings to the Allegro 5.1.x Library Primitives extensions
+Includes: allegro5/allegro.h, allegro5/allegro_primitives.h
 Version: 5.1.5.1
 SourcePath: source
 Requires: allegro5
-Pkgs: allegro_color-5
+Pkgs: allegro_primitives-5
 
 
