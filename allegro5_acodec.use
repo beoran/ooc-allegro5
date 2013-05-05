@@ -1,0 +1,8 @@
+Name: Allegro5_acodec 5.1.5
+Description: OOC Bindings to the Allegro 5.1.x Library Audio Codec extensions
+Includes: allegro5/allegro.h, allegro5/allegro_acodec.h
+Version: 5.1.5.1
+SourcePath: source
+Requires: allegro5
+Pkgs: allegro_acodec-5
+
